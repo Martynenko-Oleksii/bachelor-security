@@ -2,6 +2,8 @@ package ua.nure.liapota.controllers;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.liapota.models.UserCustomer;
 import ua.nure.liapota.services.UserCustomerService;
@@ -12,13 +14,14 @@ public class UserCustomerController {
     UserCustomerService service;
 
     @GetMapping
-    public List<String> getUsersByCustomer(@RequestBody Integer customerId) {
-        return service.getByCustomerId(customerId);
+    public ResponseEntity<List<String>> getUsersByCustomer(@RequestBody Integer customerId) {
+        return new ResponseEntity<>(service.getByCustomerId(customerId), HttpStatus.OK);
     }
 
     @DeleteMapping
-    public String delete(@RequestBody String userId) {
-        return service.delete(service.getById(userId)).getUserId();
+    public ResponseEntity<Void> delete(@RequestBody String userId) {
+        service.delete(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping

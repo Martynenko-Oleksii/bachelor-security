@@ -26,12 +26,14 @@ public class ContractController {
     }
 
     @PutMapping
-    public ResponseEntity<Contract> update(@RequestBody Contract updatedContract) {
-        return new ResponseEntity<>(service.update(updatedContract), HttpStatus.OK);
+    public ResponseEntity<Void> update(@RequestBody Contract updatedContract) {
+        service.update(updatedContract);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<Contract> delete(@RequestBody Contract deletedContract) {
-        return new ResponseEntity<>(service.delete(deletedContract), HttpStatus.OK);
+    public ResponseEntity<Void> delete(@RequestBody Integer contractId) {
+        service.delete(contractId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

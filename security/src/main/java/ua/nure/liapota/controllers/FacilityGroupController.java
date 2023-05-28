@@ -29,7 +29,8 @@ public class FacilityGroupController {
     }
 
     @DeleteMapping
-    public ResponseEntity<FacilityGroup> delete(@RequestBody FacilityGroup deletedFacilityGroup) {
-        return new ResponseEntity<>(service.delete(deletedFacilityGroup), HttpStatus.OK);
+    public ResponseEntity<Void> delete(@RequestBody Integer facilityGroupId) {
+        service.delete(facilityGroupId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

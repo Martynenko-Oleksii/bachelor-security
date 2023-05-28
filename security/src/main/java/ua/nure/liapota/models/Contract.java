@@ -1,5 +1,7 @@
 package ua.nure.liapota.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,6 +18,7 @@ public class Contract{
     private byte duration;
     private byte start;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "contract")
     private Set<Customer> customers;
 

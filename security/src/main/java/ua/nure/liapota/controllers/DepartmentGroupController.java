@@ -29,7 +29,8 @@ public class DepartmentGroupController {
     }
 
     @DeleteMapping
-    public ResponseEntity<DepartmentGroup> delete(@RequestBody DepartmentGroup deletedDepartmentGroup) {
-        return new ResponseEntity<>(service.delete(deletedDepartmentGroup), HttpStatus.OK);
+    public ResponseEntity<Void> delete(@RequestBody Integer departmentGroupId) {
+        service.delete(departmentGroupId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

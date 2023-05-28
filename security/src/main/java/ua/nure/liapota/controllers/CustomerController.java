@@ -32,8 +32,9 @@ public class CustomerController {
     }
 
     @DeleteMapping("/facilities")
-    public ResponseEntity<Facility> deleteFacility(@RequestBody Facility deletedFacility) {
-        return new ResponseEntity<>(facilityService.delete(deletedFacility), HttpStatus.OK);
+    public ResponseEntity<Void> deleteFacility(@RequestBody Integer facilityId) {
+        facilityService.delete(facilityId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
@@ -52,7 +53,8 @@ public class CustomerController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Customer> deleteCustomer(@RequestBody Customer deletedCustomer) {
-        return new ResponseEntity<>(customerService.delete(deletedCustomer), HttpStatus.OK);
+    public ResponseEntity<Void> deleteCustomer(@RequestBody Integer customerId) {
+        customerService.delete(customerId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

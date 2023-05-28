@@ -19,8 +19,7 @@ public abstract class EntityService<E, V, T extends CrudRepository<E, V>> {
         return repository.save(e);
     }
 
-    public E delete(E e) {
-        repository.delete(e);
-        return e;
+    public void delete(V id) {
+        repository.delete(repository.findById(id).get());
     }
 }
