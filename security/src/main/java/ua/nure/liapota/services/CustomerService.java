@@ -2,7 +2,11 @@ package ua.nure.liapota.services;
 
 import org.springframework.stereotype.Service;
 import ua.nure.liapota.models.Customer;
+import ua.nure.liapota.models.Facility;
 import ua.nure.liapota.repositories.CustomerRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CustomerService extends EntityService<Customer, Integer, CustomerRepository> {
@@ -14,7 +18,10 @@ public class CustomerService extends EntityService<Customer, Integer, CustomerRe
         savedCustomer.setAutoRenewal(updatedCustomer.isAutoRenewal());
         savedCustomer.setExpiringDate(updatedCustomer.getExpiringDate());
         savedCustomer.setContract(updatedCustomer.getContract());
-        savedCustomer.setFacilities(updatedCustomer.getFacilities());
         return repository.save(savedCustomer);
+    }
+
+    public List<Facility> getFacilities(Customer customer) {
+        return new ArrayList<>(customer.getFacilities());
     }
 }

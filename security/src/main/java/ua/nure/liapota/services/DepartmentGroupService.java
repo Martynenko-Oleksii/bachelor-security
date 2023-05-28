@@ -6,8 +6,6 @@ import ua.nure.liapota.repositories.DepartmentGroupRepository;
 public class DepartmentGroupService extends EntityService<DepartmentGroup, Integer, DepartmentGroupRepository> {
     public DepartmentGroup update(DepartmentGroup updatedDepartmentGroup) {
         DepartmentGroup savedDepartmentGroup = getById(updatedDepartmentGroup.getId());
-        savedDepartmentGroup.setStandardDepartments(updatedDepartmentGroup.getStandardDepartments());
-        savedDepartmentGroup.setUsersCustomers(updatedDepartmentGroup.getUsersCustomers());
         savedDepartmentGroup.setDescription(updatedDepartmentGroup.getDescription());
         savedDepartmentGroup.setName(updatedDepartmentGroup.getName());
         return repository.save(savedDepartmentGroup);

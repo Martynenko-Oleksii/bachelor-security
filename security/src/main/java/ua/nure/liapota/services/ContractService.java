@@ -12,7 +12,6 @@ public class ContractService extends EntityService<Contract, Integer, ContractRe
         savedContract.setStart(updatedContract.getStart());
         savedContract.setDuration(updatedContract.getDuration());
         savedContract.setDescription(updatedContract.getDescription());
-        savedContract.setCustomers(updatedContract.getCustomers());
         return repository.save(savedContract);
     }
 }
