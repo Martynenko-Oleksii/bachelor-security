@@ -1,10 +1,11 @@
 package ua.nure.liapota.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
+@Table(name = "customers")
 public class Customer {
     @Id
     private int id;
@@ -13,6 +14,20 @@ public class Customer {
     private Date activationDate;
     private boolean autoRenewal;
     private Date expiringDate;
+
+    @OneToMany(mappedBy = "customer")
+    private Set<Facility> facilities;
+    @ManyToOne
+    @JoinColumn(name = "contract_id")
+    private Contract contract;
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public Set<Facility> getFacilities() {
+        return facilities;
+    }
 
     public int getId() {
         return id;
