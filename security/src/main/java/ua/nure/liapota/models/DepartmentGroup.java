@@ -18,7 +18,7 @@ public class DepartmentGroup {
             inverseJoinColumns = @JoinColumn(name = "standart_department_id"))
     private Set<StandardDepartment> standardDepartments;
     @OneToMany(mappedBy = "departmentGroup")
-    private Set<UsersCustomers> usersCustomers;
+    private Set<UserCustomer> usersCustomers;
 
     public Set<StandardDepartment> getStandardDepartments() {
         return standardDepartments;
@@ -28,11 +28,11 @@ public class DepartmentGroup {
         this.standardDepartments = standardDepartments;
     }
 
-    public Set<UsersCustomers> getUsersCustomers() {
+    public Set<UserCustomer> getUsersCustomers() {
         return usersCustomers;
     }
 
-    public void setUsersCustomers(Set<UsersCustomers> usersCustomers) {
+    public void setUsersCustomers(Set<UserCustomer> usersCustomers) {
         this.usersCustomers = usersCustomers;
     }
 

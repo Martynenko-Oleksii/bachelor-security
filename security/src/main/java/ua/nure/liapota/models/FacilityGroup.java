@@ -14,7 +14,7 @@ public class FacilityGroup {
     @ManyToMany(mappedBy = "facilityGroups")
     private Set<Facility> facilities;
     @OneToMany(mappedBy = "facilityGroup")
-    private Set<UsersCustomers> usersCustomers;
+    private Set<UserCustomer> usersCustomers;
 
     public Set<Facility> getFacilities() {
         return facilities;
@@ -24,11 +24,11 @@ public class FacilityGroup {
         this.facilities = facilities;
     }
 
-    public Set<UsersCustomers> getUsersCustomers() {
+    public Set<UserCustomer> getUsersCustomers() {
         return usersCustomers;
     }
 
-    public void setUsersCustomers(Set<UsersCustomers> usersCustomers) {
+    public void setUsersCustomers(Set<UserCustomer> usersCustomers) {
         this.usersCustomers = usersCustomers;
     }
 
