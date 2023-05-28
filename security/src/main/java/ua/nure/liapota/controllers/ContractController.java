@@ -36,9 +36,9 @@ public class ContractController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@RequestBody Integer contractId) {
-        service.delete(contractId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
