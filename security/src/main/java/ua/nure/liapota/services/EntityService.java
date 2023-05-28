@@ -1,11 +1,13 @@
 package ua.nure.liapota.services;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public abstract class EntityService<E, V, T extends CrudRepository<E, V>> {
-    T repository;
+    protected T repository;
 
     public List<E> getAll() {
         return (List<E>) repository.findAll();

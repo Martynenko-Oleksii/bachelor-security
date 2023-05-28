@@ -1,6 +1,7 @@
 package ua.nure.liapota.controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/contracts")
 public class ContractController {
+    private final ContractService service;
 
-    ContractService service;
+    @Autowired
+    public ContractController(ContractService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<Contract>> getAll() {
