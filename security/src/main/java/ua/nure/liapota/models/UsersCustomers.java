@@ -3,6 +3,7 @@ package ua.nure.liapota.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users_customers")
 public class UsersCustomers {
     @Id
     private String userId;

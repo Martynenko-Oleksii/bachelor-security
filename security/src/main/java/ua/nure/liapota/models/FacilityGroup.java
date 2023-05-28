@@ -1,12 +1,10 @@
 package ua.nure.liapota.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "facility_groups")
 public class FacilityGroup {
     @Id
     private int id;

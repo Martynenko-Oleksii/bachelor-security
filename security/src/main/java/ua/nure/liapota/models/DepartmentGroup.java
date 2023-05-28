@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name = "department_groups")
 public class DepartmentGroup {
     @Id
     private int id;
