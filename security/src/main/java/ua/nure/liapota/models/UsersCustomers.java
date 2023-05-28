@@ -19,8 +19,16 @@ public class UsersCustomers {
         return facilityGroup;
     }
 
+    public void setFacilityGroup(FacilityGroup facilityGroup) {
+        this.facilityGroup = facilityGroup;
+    }
+
     public DepartmentGroup getDepartmentGroup() {
         return departmentGroup;
+    }
+
+    public void setDepartmentGroup(DepartmentGroup departmentGroup) {
+        this.departmentGroup = departmentGroup;
     }
 
     public String getUserId() {

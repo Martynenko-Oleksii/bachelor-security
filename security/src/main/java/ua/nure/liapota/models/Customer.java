@@ -21,12 +21,24 @@ public class Customer {
     @JoinColumn(name = "contract_id")
     private Contract contract;
 
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
     public Contract getContract() {
         return contract;
     }
 
+    public void setFacilities(Set<Facility> facilities) {
+        this.facilities = facilities;
+    }
+
     public Set<Facility> getFacilities() {
         return facilities;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

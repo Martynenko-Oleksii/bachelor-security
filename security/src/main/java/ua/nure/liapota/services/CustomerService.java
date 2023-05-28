@@ -13,6 +13,8 @@ public class CustomerService extends EntityService<Customer, Integer, CustomerRe
         savedCustomer.setName(updatedCustomer.getName());
         savedCustomer.setAutoRenewal(updatedCustomer.isAutoRenewal());
         savedCustomer.setExpiringDate(updatedCustomer.getExpiringDate());
+        savedCustomer.setContract(updatedCustomer.getContract());
+        savedCustomer.setFacilities(updatedCustomer.getFacilities());
         return repository.save(savedCustomer);
     }
 }

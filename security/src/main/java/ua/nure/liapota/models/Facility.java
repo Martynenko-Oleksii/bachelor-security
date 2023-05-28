@@ -36,12 +36,28 @@ public class Facility {
         return customer;
     }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public Set<FacilityGroup> getFacilityGroups() {
         return facilityGroups;
     }
 
+    public void setFacilityGroups(Set<FacilityGroup> facilityGroups) {
+        this.facilityGroups = facilityGroups;
+    }
+
     public Set<StandardDepartment> getFacilityStandardDepartments() {
         return facilityStandardDepartments;
+    }
+
+    public void setFacilityStandardDepartments(Set<StandardDepartment> facilityStandardDepartments) {
+        this.facilityStandardDepartments = facilityStandardDepartments;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

@@ -10,6 +10,8 @@ public class FacilityGroupService extends EntityService<FacilityGroup, Integer, 
         FacilityGroup savedFacilityGroup = getById(updatedFacilityGroup.getId());
         savedFacilityGroup.setDescription(updatedFacilityGroup.getDescription());
         savedFacilityGroup.setName(updatedFacilityGroup.getName());
+        savedFacilityGroup.setFacilities(updatedFacilityGroup.getFacilities());
+        savedFacilityGroup.setUsersCustomers(updatedFacilityGroup.getUsersCustomers());
         return repository.save(savedFacilityGroup);
     }
 }

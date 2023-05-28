@@ -19,8 +19,20 @@ public class StandardDepartment {
         return facilities;
     }
 
+    public void setFacilities(Set<Facility> facilities) {
+        this.facilities = facilities;
+    }
+
     public Set<DepartmentGroup> getDepartmentGroups() {
         return departmentGroups;
+    }
+
+    public void setDepartmentGroups(Set<DepartmentGroup> departmentGroups) {
+        this.departmentGroups = departmentGroups;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

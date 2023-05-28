@@ -22,8 +22,20 @@ public class FacilityGroup {
         return facilities;
     }
 
+    public void setFacilities(Set<Facility> facilities) {
+        this.facilities = facilities;
+    }
+
     public Set<UsersCustomers> getUsersCustomers() {
         return usersCustomers;
+    }
+
+    public void setUsersCustomers(Set<UsersCustomers> usersCustomers) {
+        this.usersCustomers = usersCustomers;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

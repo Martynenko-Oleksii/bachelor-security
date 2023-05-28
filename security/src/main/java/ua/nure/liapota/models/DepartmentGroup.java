@@ -23,8 +23,20 @@ public class DepartmentGroup {
         return standardDepartments;
     }
 
+    public void setStandardDepartments(Set<StandardDepartment> standardDepartments) {
+        this.standardDepartments = standardDepartments;
+    }
+
     public Set<UsersCustomers> getUsersCustomers() {
         return usersCustomers;
+    }
+
+    public void setUsersCustomers(Set<UsersCustomers> usersCustomers) {
+        this.usersCustomers = usersCustomers;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

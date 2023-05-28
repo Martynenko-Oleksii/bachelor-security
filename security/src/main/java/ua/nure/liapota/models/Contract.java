@@ -25,6 +25,14 @@ public class Contract{
 
     public Contract(){}
 
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
