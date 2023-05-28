@@ -1,8 +1,10 @@
 package ua.nure.liapota.services;
 
+import org.springframework.stereotype.Service;
 import ua.nure.liapota.models.Customer;
 import ua.nure.liapota.repositories.CustomerRepository;
 
+@Service
 public class CustomerService extends EntityService<Customer, Integer, CustomerRepository> {
     public Customer update(Customer updatedCustomer) {
         Customer savedCustomer = getById(updatedCustomer.getId());
