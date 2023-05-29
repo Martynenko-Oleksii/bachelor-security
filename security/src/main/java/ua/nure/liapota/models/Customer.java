@@ -1,5 +1,7 @@
 package ua.nure.liapota.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -8,6 +10,8 @@ import java.util.Set;
 @Table(name = "customers")
 public class Customer {
     @Id
+    @Column(name = "customer_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
@@ -15,6 +19,7 @@ public class Customer {
     private boolean autoRenewal;
     private Date expiringDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private Set<Facility> facilities;
     @ManyToOne

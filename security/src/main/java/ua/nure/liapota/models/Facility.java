@@ -1,5 +1,7 @@
 package ua.nure.liapota.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -7,19 +9,26 @@ import java.util.Set;
 @Table(name = "facilities")
 public class Facility {
     @Id
+    @Column(name = "facility_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String abbreviation;
-    private String ZIPCode;
+    @Column(name = "ZIP_code")
+    private String zipCode;
+    @Column(name = "address_1")
     private String address1;
+    @Column(name = "address_2")
     private String address2;
     private String city;
     private String contactPhone;
     private String contactEmail;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="customer_id")
     private Customer customer;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "facilities_facility_groups",
@@ -121,11 +130,11 @@ public class Facility {
         return contactPhone;
     }
 
-    public void setZIPCode(String ZIPCode) {
-        this.ZIPCode = ZIPCode;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
-    public String getZIPCode() {
-        return ZIPCode;
+    public String getZipCode() {
+        return zipCode;
     }
 }

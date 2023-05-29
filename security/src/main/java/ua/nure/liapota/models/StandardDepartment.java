@@ -1,5 +1,7 @@
 package ua.nure.liapota.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -7,12 +9,15 @@ import java.util.Set;
 @Table(name = "standart_departments")
 public class StandardDepartment {
     @Id
+    @Column(name = "standart_department_id")
     private int id;
     private String name;
     private String description;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "facilityStandardDepartments")
     private Set<Facility> facilities;
+    @JsonIgnore
     @ManyToMany(mappedBy = "standardDepartments")
     private Set<DepartmentGroup> departmentGroups;
 

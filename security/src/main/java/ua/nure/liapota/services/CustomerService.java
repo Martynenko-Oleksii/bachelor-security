@@ -16,7 +16,7 @@ public class CustomerService extends EntityService<Customer, Integer, CustomerRe
         this.repository = repository;
     }
 
-    public Customer update(Customer updatedCustomer) {
+    public void update(Customer updatedCustomer) {
         Customer savedCustomer = getById(updatedCustomer.getId());
         savedCustomer.setActivationDate(updatedCustomer.getActivationDate());
         savedCustomer.setDescription(updatedCustomer.getDescription());
@@ -24,10 +24,11 @@ public class CustomerService extends EntityService<Customer, Integer, CustomerRe
         savedCustomer.setAutoRenewal(updatedCustomer.isAutoRenewal());
         savedCustomer.setExpiringDate(updatedCustomer.getExpiringDate());
         savedCustomer.setContract(updatedCustomer.getContract());
-        return repository.save(savedCustomer);
+        repository.save(savedCustomer);
     }
 
-    public List<Facility> getFacilities(Customer customer) {
+    public List<Facility> getFacilities(Integer customerId) {
+        Customer customer = getById(customerId);
         return new ArrayList<>(customer.getFacilities());
     }
 }

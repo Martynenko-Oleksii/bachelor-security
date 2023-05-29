@@ -1,5 +1,6 @@
 package ua.nure.liapota.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,27 +14,34 @@ import java.util.List;
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
-    CustomerService customerService;
-    FacilityService facilityService;
+    private final CustomerService customerService;
+    private final FacilityService facilityService;
 
-    @GetMapping("/facilities")
-    public ResponseEntity<List<Facility>> getFacilities(@RequestBody Customer customer) {
-        return new ResponseEntity<>(customerService.getFacilities(customer), HttpStatus.OK);
+    @Autowired
+    public CustomerController(CustomerService customerService, FacilityService facilityService) {
+        this.customerService = customerService;
+        this.facilityService = facilityService;
     }
 
-    @PostMapping("/facilities")
-    public ResponseEntity<Facility> createFacility(@RequestBody Facility newFacility) {
-        return new ResponseEntity<>(facilityService.create(newFacility), HttpStatus.OK);
+    @GetMapping("/facilities/{id}")
+    public ResponseEntity<List<Facility>> getFacilities(@PathVariable Integer id) {
+        return new ResponseEntity<>(customerService.getFacilities(id), HttpStatus.OK);
+    }
+
+    @PostMapping("/facilities/{id}")
+    public ResponseEntity<Facility> createFacility(@RequestBody Facility newFacility, @PathVariable Integer id) {
+        return new ResponseEntity<>(facilityService.create(newFacility, customerService.getById(id)), HttpStatus.OK);
     }
 
     @PutMapping("/facilities")
-    public ResponseEntity<Facility> updateFacility(@RequestBody Facility updatedFacility) {
-        return new ResponseEntity<>(facilityService.update(updatedFacility), HttpStatus.OK);
+    public ResponseEntity<Void> updateFacility(@RequestBody Facility updatedFacility) {
+        facilityService.update(updatedFacility);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/facilities")
-    public ResponseEntity<Void> deleteFacility(@RequestBody Integer facilityId) {
-        facilityService.delete(facilityId);
+    @DeleteMapping("/facilities/{id}")
+    public ResponseEntity<Void> deleteFacility(@PathVariable Integer id) {
+        facilityService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -48,13 +56,14 @@ public class CustomerController {
     }
 
     @PutMapping
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer updatedCustomer) {
-        return new ResponseEntity<>(customerService.update(updatedCustomer), HttpStatus.OK);
+    public ResponseEntity<Void> updateCustomer(@RequestBody Customer updatedCustomer) {
+        customerService.update(updatedCustomer);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteCustomer(@RequestBody Integer customerId) {
-        customerService.delete(customerId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
+        customerService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
