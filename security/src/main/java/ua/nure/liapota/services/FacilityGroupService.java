@@ -5,11 +5,17 @@ import org.springframework.stereotype.Service;
 import ua.nure.liapota.models.FacilityGroup;
 import ua.nure.liapota.repositories.FacilityGroupRepository;
 
+import java.util.List;
+
 @Service
 public class FacilityGroupService extends EntityService<FacilityGroup, Integer, FacilityGroupRepository> {
     @Autowired
     public FacilityGroupService(FacilityGroupRepository repository) {
         this.repository = repository;
+    }
+
+    public List<FacilityGroup> getByCustomerId(Integer id) {
+        return repository.getFacilityGroupByCustomerId(id);
     }
 
     public void update(FacilityGroup updatedFacilityGroup) {

@@ -19,9 +19,9 @@ public class FacilityGroupController {
         this.service = service;
     }
 
-    @GetMapping
-    public ResponseEntity<List<FacilityGroup>> getAll() {
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<List<FacilityGroup>> getFacilityGroupsByCustomer(@PathVariable Integer id) {
+        return new ResponseEntity<>(service.getByCustomerId(id), HttpStatus.OK);
     }
 
     @PostMapping

@@ -14,7 +14,15 @@ public class UserCustomerService extends EntityService<UserCustomer, String, Use
         this.repository = repository;
     }
 
-    public List<String> getByCustomerId(Integer id) {
+    public void update(UserCustomer userCustomer) {
+        UserCustomer saveUserCustomer = getById(userCustomer.getUserId());
+        saveUserCustomer.setCustomerId(userCustomer.getCustomerId());
+        saveUserCustomer.setDepartmentGroup(userCustomer.getDepartmentGroup());
+        saveUserCustomer.setFacilityGroup(userCustomer.getFacilityGroup());
+        repository.save(userCustomer);
+    }
+
+    public List<UserCustomer> getByCustomerId(Integer id) {
         return repository.getUserCustomerByCustomerId(id);
     }
 }

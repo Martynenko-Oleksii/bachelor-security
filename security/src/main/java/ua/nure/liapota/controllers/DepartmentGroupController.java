@@ -19,9 +19,9 @@ public class DepartmentGroupController {
         this.service = service;
     }
 
-    @GetMapping
-    public ResponseEntity<List<DepartmentGroup>> getAll() {
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    @GetMapping("/{id}")
+    public ResponseEntity<List<DepartmentGroup>> getDepartmentGroupsByCustomer(@PathVariable Integer id) {
+        return new ResponseEntity<>(service.getByCustomerId(id), HttpStatus.OK);
     }
 
     @PostMapping

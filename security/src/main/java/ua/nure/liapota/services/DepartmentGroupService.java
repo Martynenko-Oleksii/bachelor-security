@@ -5,11 +5,17 @@ import org.springframework.stereotype.Service;
 import ua.nure.liapota.models.DepartmentGroup;
 import ua.nure.liapota.repositories.DepartmentGroupRepository;
 
+import java.util.List;
+
 @Service
 public class DepartmentGroupService extends EntityService<DepartmentGroup, Integer, DepartmentGroupRepository> {
     @Autowired
     public DepartmentGroupService(DepartmentGroupRepository repository) {
         this.repository = repository;
+    }
+
+    public List<DepartmentGroup> getByCustomerId(Integer id) {
+        return repository.getDepartmentGroupByCustomerId(id);
     }
 
     public void update(DepartmentGroup updatedDepartmentGroup) {
