@@ -12,10 +12,11 @@ public class DepartmentGroupService extends EntityService<DepartmentGroup, Integ
         this.repository = repository;
     }
 
-    public DepartmentGroup update(DepartmentGroup updatedDepartmentGroup) {
+    public void update(DepartmentGroup updatedDepartmentGroup) {
         DepartmentGroup savedDepartmentGroup = getById(updatedDepartmentGroup.getId());
         savedDepartmentGroup.setDescription(updatedDepartmentGroup.getDescription());
         savedDepartmentGroup.setName(updatedDepartmentGroup.getName());
-        return repository.save(savedDepartmentGroup);
+        savedDepartmentGroup.setStandardDepartments(updatedDepartmentGroup.getStandardDepartments());
+        repository.save(savedDepartmentGroup);
     }
 }

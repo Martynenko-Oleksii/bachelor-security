@@ -1,5 +1,6 @@
 package ua.nure.liapota.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/departmentGroups")
 public class DepartmentGroupController {
-    DepartmentGroupService service;
+    private final DepartmentGroupService service;
+
+    @Autowired
+    public DepartmentGroupController(DepartmentGroupService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<DepartmentGroup>> getAll() {
@@ -24,13 +30,14 @@ public class DepartmentGroupController {
     }
 
     @PutMapping
-    public ResponseEntity<DepartmentGroup> update(@RequestBody DepartmentGroup updatedDepartmentGroup) {
-        return new ResponseEntity<>(service.update(updatedDepartmentGroup), HttpStatus.OK);
+    public ResponseEntity<Void> update(@RequestBody DepartmentGroup updatedDepartmentGroup) {
+        service.update(updatedDepartmentGroup);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@RequestBody Integer departmentGroupId) {
-        service.delete(departmentGroupId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        service.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
