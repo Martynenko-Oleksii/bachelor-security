@@ -23,6 +23,11 @@ public class CustomerController {
         this.facilityService = facilityService;
     }
 
+    @GetMapping("/expiring")
+    public ResponseEntity<List<Customer>> getExpiring() {
+        return new ResponseEntity<>(customerService.getExpiring(), HttpStatus.OK);
+    }
+
     @GetMapping("/facilities/{id}")
     public ResponseEntity<List<Facility>> getFacilities(@PathVariable Integer id) {
         return new ResponseEntity<>(customerService.getFacilities(id), HttpStatus.OK);
