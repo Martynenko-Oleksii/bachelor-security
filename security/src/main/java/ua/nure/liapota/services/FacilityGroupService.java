@@ -12,10 +12,12 @@ public class FacilityGroupService extends EntityService<FacilityGroup, Integer, 
         this.repository = repository;
     }
 
-    public FacilityGroup update(FacilityGroup updatedFacilityGroup) {
+    public void update(FacilityGroup updatedFacilityGroup) {
         FacilityGroup savedFacilityGroup = getById(updatedFacilityGroup.getId());
         savedFacilityGroup.setDescription(updatedFacilityGroup.getDescription());
         savedFacilityGroup.setName(updatedFacilityGroup.getName());
-        return repository.save(savedFacilityGroup);
+        savedFacilityGroup.setCustomerId(updatedFacilityGroup.getCustomerId());
+        savedFacilityGroup.setFacilities(updatedFacilityGroup.getFacilities());
+        repository.save(savedFacilityGroup);
     }
 }

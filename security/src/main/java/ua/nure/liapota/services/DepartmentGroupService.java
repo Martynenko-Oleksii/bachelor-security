@@ -16,6 +16,7 @@ public class DepartmentGroupService extends EntityService<DepartmentGroup, Integ
         DepartmentGroup savedDepartmentGroup = getById(updatedDepartmentGroup.getId());
         savedDepartmentGroup.setDescription(updatedDepartmentGroup.getDescription());
         savedDepartmentGroup.setName(updatedDepartmentGroup.getName());
+        savedDepartmentGroup.setCustomerId(updatedDepartmentGroup.getCustomerId());
         savedDepartmentGroup.setStandardDepartments(updatedDepartmentGroup.getStandardDepartments());
         repository.save(savedDepartmentGroup);
     }

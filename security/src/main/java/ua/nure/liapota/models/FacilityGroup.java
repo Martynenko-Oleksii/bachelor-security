@@ -1,5 +1,7 @@
 package ua.nure.liapota.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -7,14 +9,26 @@ import java.util.Set;
 @Table(name = "facility_groups")
 public class FacilityGroup {
     @Id
+    @Column(name = "facility_group_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
+    private int customerId;
 
     @ManyToMany(mappedBy = "facilityGroups")
     private Set<Facility> facilities;
+    @JsonIgnore
     @OneToMany(mappedBy = "facilityGroup")
     private Set<UserCustomer> usersCustomers;
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
     public Set<Facility> getFacilities() {
         return facilities;
