@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/facilityGroups")
+@CrossOrigin(origins = "http://localhost:4200")
 public class FacilityGroupController {
     private final FacilityGroupService service;
 

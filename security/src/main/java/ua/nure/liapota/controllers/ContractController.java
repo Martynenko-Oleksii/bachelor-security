@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contracts")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ContractController {
     private final ContractService service;
 

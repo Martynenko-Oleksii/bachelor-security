@@ -11,6 +11,7 @@ import ua.nure.liapota.services.UserCustomerService;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserCustomerController {
     private final UserCustomerService service;
 

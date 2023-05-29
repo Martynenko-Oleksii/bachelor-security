@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/departmentGroups")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DepartmentGroupController {
     private final DepartmentGroupService service;
 
