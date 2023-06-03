@@ -16,7 +16,11 @@ public class FacilityGroup {
     private String description;
     private int customerId;
 
-    @ManyToMany(mappedBy = "facilityGroups")
+    @ManyToMany
+    @JoinTable(
+            name = "facilities_facility_groups",
+            joinColumns = @JoinColumn(name = "facility_group_id"),
+            inverseJoinColumns = @JoinColumn(name = "facility_id"))
     private Set<Facility> facilities;
     @JsonIgnore
     @OneToMany(mappedBy = "facilityGroup")

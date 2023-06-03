@@ -29,11 +29,7 @@ public class Facility {
     @JoinColumn(name="customer_id")
     private Customer customer;
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-            name = "facilities_facility_groups",
-            joinColumns = @JoinColumn(name = "facility_id"),
-            inverseJoinColumns = @JoinColumn(name = "facility_group_id"))
+    @ManyToMany(mappedBy = "facilities")
     private Set<FacilityGroup> facilityGroups;
     @ManyToMany
     @JoinTable(
