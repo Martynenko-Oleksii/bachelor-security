@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.nure.liapota.annotations.Authorize;
 import ua.nure.liapota.models.UserCustomer;
 import ua.nure.liapota.services.UserCustomerService;
 
+import javax.servlet.http.HttpServletRequest;
+
+@Authorize("security,access-control")
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,14 +24,17 @@ public class UserCustomerController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<UserCustomer>> getUsersByCustomer(@PathVariable Integer id) {
-        return new ResponseEntity<>(service.getByCustomerId(id), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<UserCustomer>> getUsersByCustomer(HttpServletRequest request) {
+        return new ResponseEntity<>(service.getByCustomerId((Integer) request.getAttribute("customerId")),
+                HttpStatus.OK);
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> delete(@PathVariable String userId) {
-        service.delete(userId);
+    public ResponseEntity<Void> delete(@PathVariable String userId, HttpServletRequest request) {
+        if (!userId.equals(request.getAttribute("userId"))) {
+            service.delete(userId);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

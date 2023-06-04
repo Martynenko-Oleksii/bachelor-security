@@ -11,6 +11,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
+import org.springframework.lang.NonNullApi;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -34,7 +36,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     private String issuer;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest  request, HttpServletResponse response, Object handler) throws Exception {
         if(!(handler instanceof HandlerMethod)){
             return true;
         }
@@ -42,11 +44,12 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod = (HandlerMethod)handler;
         Method method = handlerMethod.getMethod();
         Class<?> controllerClass = method.getDeclaringClass();
+
         if (controllerClass.isAnnotationPresent(RestController.class)
             && controllerClass.isAnnotationPresent(Authorize.class)) {
 
-            Authorize auth = controllerClass.getAnnotation(Authorize.class);
-            String[] roleParams = auth.value().split(",");
+            Authorize authorize = controllerClass.getAnnotation(Authorize.class);
+            String[] roleParams = authorize.value().split(",");
 
             String originToken = request.getHeader("Authorization");
             if (originToken == null || originToken.isEmpty()){
@@ -64,8 +67,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 Claim roleClaim = jwt.getClaim("role");
                 String[] roles = roleClaim.asArray(String.class);
 
-                for (int i = 0; i < roleParams.length; i++) {
-                    if (!Arrays.stream(roles).anyMatch(roleParams[i]::equals)) {
+                for (String roleParam : roleParams) {
+                    if (Arrays.stream(roles).noneMatch(roleParam::equals)) {
                         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                         return false;
                     }

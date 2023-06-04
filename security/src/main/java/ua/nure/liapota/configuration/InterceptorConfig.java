@@ -1,4 +1,4 @@
-package ua.nure.liapota.configs;
+package ua.nure.liapota.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

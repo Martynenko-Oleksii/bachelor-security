@@ -4,13 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.nure.liapota.annotations.Authorize;
 import ua.nure.liapota.models.Customer;
 import ua.nure.liapota.models.Facility;
 import ua.nure.liapota.services.CustomerService;
 import ua.nure.liapota.services.FacilityService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Authorize("security,customer-management")
 @RestController
 @RequestMapping("/customers")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -29,14 +32,17 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getExpiring(), HttpStatus.OK);
     }
 
-    @GetMapping("/facilities/{id}")
-    public ResponseEntity<List<Facility>> getFacilities(@PathVariable Integer id) {
-        return new ResponseEntity<>(customerService.getFacilities(id), HttpStatus.OK);
+    @GetMapping("/facilities")
+    public ResponseEntity<List<Facility>> getFacilities(HttpServletRequest request) {
+        return new ResponseEntity<>(customerService.getFacilities((Integer) request.getAttribute("customerId")),
+                HttpStatus.OK);
     }
 
-    @PostMapping("/facilities/{id}")
-    public ResponseEntity<Facility> createFacility(@RequestBody Facility newFacility, @PathVariable Integer id) {
-        return new ResponseEntity<>(facilityService.create(newFacility, customerService.getById(id)), HttpStatus.OK);
+    @PostMapping("/facilities")
+    public ResponseEntity<Facility> createFacility(@RequestBody Facility newFacility, HttpServletRequest request) {
+        return new ResponseEntity<>(facilityService.create(newFacility,
+                customerService.getById((Integer) request.getAttribute("customerId"))),
+                HttpStatus.OK);
     }
 
     @PutMapping("/facilities")
@@ -68,8 +74,10 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
-        customerService.delete(id);
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id, HttpServletRequest request) {
+        if (id != request.getAttribute("customerId")) {
+            customerService.delete(id);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

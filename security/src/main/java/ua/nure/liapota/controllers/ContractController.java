@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.nure.liapota.annotations.Authorize;
 import ua.nure.liapota.models.Contract;
 import ua.nure.liapota.services.ContractService;
 
 import java.util.List;
 
+@Authorize("security,contract-management")
 @RestController
 @RequestMapping("/contracts")
 @CrossOrigin(origins = "http://localhost:4200")

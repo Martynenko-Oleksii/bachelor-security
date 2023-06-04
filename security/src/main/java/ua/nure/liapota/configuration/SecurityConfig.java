@@ -1,4 +1,4 @@
-package ua.nure.liapota.configs;
+package ua.nure.liapota.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +11,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
+        http
+                .cors()
+                .and()
+                .csrf().disable();
     }
 }

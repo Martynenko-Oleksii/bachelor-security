@@ -3,7 +3,6 @@ package ua.nure.liapota.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.liapota.annotations.Authorize;
 import ua.nure.liapota.models.FacilityGroup;
@@ -24,12 +23,10 @@ public class FacilityGroupController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<FacilityGroup>> getFacilityGroupsByCustomer(@PathVariable Integer id, HttpServletRequest request) {
-        String userId = (String)request.getAttribute("userId");
-        int customerId = (int)request.getAttribute("customerId");
-
-        return new ResponseEntity<>(service.getByCustomerId(id), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<FacilityGroup>> getFacilityGroupsByCustomer(HttpServletRequest request) {
+        return new ResponseEntity<>(service.getByCustomerId((Integer) request.getAttribute("customerId")),
+                HttpStatus.OK);
     }
 
     @PostMapping

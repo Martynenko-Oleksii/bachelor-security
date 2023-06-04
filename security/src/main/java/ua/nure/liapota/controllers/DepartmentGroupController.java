@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.nure.liapota.annotations.Authorize;
 import ua.nure.liapota.models.DepartmentGroup;
 import ua.nure.liapota.services.DepartmentGroupService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@Authorize("security,access-control")
 @RestController
 @RequestMapping("/departmentGroups")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -20,9 +23,10 @@ public class DepartmentGroupController {
         this.service = service;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<DepartmentGroup>> getDepartmentGroupsByCustomer(@PathVariable Integer id) {
-        return new ResponseEntity<>(service.getByCustomerId(id), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<List<DepartmentGroup>> getDepartmentGroupsByCustomer(HttpServletRequest request) {
+        return new ResponseEntity<>(service.getByCustomerId((Integer) request.getAttribute("customerId")),
+                HttpStatus.OK);
     }
 
     @PostMapping
