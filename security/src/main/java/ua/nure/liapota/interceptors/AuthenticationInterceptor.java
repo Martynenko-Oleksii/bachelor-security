@@ -71,6 +71,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     }
                 }
 
+                request.setAttribute("userId", jwt.getSubject());
+                request.setAttribute("customerId", jwt.getClaim("customerId").asInt());
+
                 Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(),null);
                 JWTVerifier verifier = JWT.require(algorithm)
                         .withIssuer(issuer)

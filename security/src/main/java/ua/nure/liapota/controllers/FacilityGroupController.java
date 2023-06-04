@@ -9,6 +9,7 @@ import ua.nure.liapota.annotations.Authorize;
 import ua.nure.liapota.models.FacilityGroup;
 import ua.nure.liapota.services.FacilityGroupService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Authorize("security,access-control")
@@ -24,7 +25,10 @@ public class FacilityGroupController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<FacilityGroup>> getFacilityGroupsByCustomer(@PathVariable Integer id) {
+    public ResponseEntity<List<FacilityGroup>> getFacilityGroupsByCustomer(@PathVariable Integer id, HttpServletRequest request) {
+        String userId = (String)request.getAttribute("userId");
+        int customerId = (int)request.getAttribute("customerId");
+
         return new ResponseEntity<>(service.getByCustomerId(id), HttpStatus.OK);
     }
 
