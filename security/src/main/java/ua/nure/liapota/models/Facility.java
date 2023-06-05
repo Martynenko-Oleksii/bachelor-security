@@ -21,7 +21,9 @@ public class Facility {
     @Column(name = "address_2")
     private String address2;
     private String city;
+    @Column(name = "contact_phone")
     private String contactPhone;
+    @Column(name = "contact_email")
     private String contactEmail;
 
     @JsonIgnore

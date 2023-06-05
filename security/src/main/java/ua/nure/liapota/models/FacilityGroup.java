@@ -14,6 +14,7 @@ public class FacilityGroup {
     private int id;
     private String name;
     private String description;
+    @Column(name = "customer_id")
     private int customerId;
 
     @ManyToMany
